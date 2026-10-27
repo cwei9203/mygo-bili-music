@@ -1,0 +1,12 @@
+{
+  "name": "拾音",
+  "slug": "shiyin",
+  "identifier": "local.chenwei.shiyin",
+  "version": "0.1.0",
+  "devUrl": "http://localhost:5174",
+  "devCommand": "npm run dev:web",
+  "buildCommand": "npm run build:web",
+  "frontendDist": "dist",
+  "bindings": "src/mygo.ts",
+  "out": "build"
+}

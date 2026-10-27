@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "result": {
+    "ui": true,
+    "ipc": true,
+    "parts": true,
+    "media": [
+      {
+        "filename": "audio.m4a",
+        "play": true,
+        "pause": true,
+        "seek": true,
+        "resume": true
+      },
+      {
+        "filename": "mixed.mp4",
+        "play": true,
+        "pause": true,
+        "seek": true,
+        "resume": true
+      }
+    ],
+    "selection": {
+      "singleDirect": true,
+      "directCollection": true,
+      "batchAllParts": true,
+      "backPreservesResults": true,
+      "multipleParts": true,
+      "singleCollection": true,
+      "emptyBasketHidden": true
+    },
+    "player": {
+      "staleResolutionIgnored": true,
+      "liveRemoval": true,
+      "errorRetainsTrack": true,
+      "savePreservesPreview": true
+    }
+  }
+}
