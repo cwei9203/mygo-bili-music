@@ -1,0 +1,18 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Corner radius" subtitle="sm 4 / md 8 / lg 10 / xl 16 / full" -->
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; padding:20px; background:var(--s2-background-base); font-family:var(--s2-font-sans); }
+  .row { display:flex; gap:20px; }
+  .box { flex:1; height:72px; display:grid; place-items:center; background:var(--s2-background-layer-1); border:1px solid var(--s2-gray-200); font-size:11px; font-family:var(--s2-font-code); color:var(--s2-text-subdued); }
+</style></head>
+<body>
+  <div class="row">
+    <div class="box" style="border-radius:var(--s2-radius-sm)">sm · 4</div>
+    <div class="box" style="border-radius:var(--s2-radius-md)">md · 8</div>
+    <div class="box" style="border-radius:var(--s2-radius-lg)">lg · 10</div>
+    <div class="box" style="border-radius:var(--s2-radius-xl)">xl · 16</div>
+    <div class="box" style="border-radius:var(--s2-radius-full)">full</div>
+  </div>
+</body></html>

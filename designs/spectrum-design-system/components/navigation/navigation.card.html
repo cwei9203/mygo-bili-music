@@ -1,0 +1,62 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Navigation" subtitle="Tabs 与 Menu" -->
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--s2-background-base); }
+  .label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--s2-text-subdued); margin: 0 0 8px; }
+  .block { margin-bottom: 22px; }
+  .panel { padding: 12px; border-radius: var(--s2-radius-md); background: var(--s2-background-layer-1); font-size: 13px; color: var(--s2-text-subdued); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Tabs, Menu } = window.SpectrumDesignSystem_a44d86;
+
+function NavigationCard() {
+  const [tab, setTab] = React.useState('liked');
+
+  return (
+    <div>
+      <div className="block">
+        <div className="label">Tabs</div>
+        <Tabs
+          items={[
+            { id: 'liked', label: '我喜欢', content: <div className="panel">8 首 · 36 分钟 · 列表存在这台 Mac</div> },
+            { id: 'night', label: '夜航', content: <div className="panel">4 首 · 20 分钟</div> },
+            { id: 'code', label: '写代码', content: <div className="panel">5 首 · 25 分钟</div> },
+            { id: 'sleep', label: '睡前', content: <div className="panel">3 首 · 9 分钟</div> },
+          ]}
+          selectedKey={tab}
+          onSelectionChange={setTab}
+        />
+      </div>
+
+      <div className="block">
+        <div className="label">Menu（点击展开）</div>
+        <Menu
+          label="列表操作"
+          variant="secondary"
+          items={[
+            { id: 'rename', label: '重命名', icon: 'edit' },
+            { id: 'duplicate', label: '复制列表', icon: 'add' },
+            { id: 'delete', label: '删除列表', icon: 'close' },
+          ]}
+          onAction={(key) => console.log(key)}
+        />
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<NavigationCard />);
+</script>
+</body>
+</html>

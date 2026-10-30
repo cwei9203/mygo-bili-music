@@ -1,0 +1,2703 @@
+{
+  "namespace": "SpectrumDesignSystem_a44d86",
+  "components": [
+    {
+      "name": "Button",
+      "sourcePath": "components/actions/Button.jsx",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "accent",
+            "negative",
+            "quiet"
+          ]
+        },
+        {
+          "name": "fillStyle",
+          "values": [
+            "fill",
+            "outline"
+          ]
+        },
+        {
+          "name": "size",
+          "values": [
+            "S",
+            "M",
+            "L",
+            "XL"
+          ]
+        },
+        {
+          "name": "icon",
+          "type": "string"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onPress",
+          "type": "() => void"
+        },
+        {
+          "name": "onClick",
+          "type": "React.MouseEventHandler<HTMLButtonElement>"
+        },
+        {
+          "name": "type",
+          "values": [
+            "button",
+            "submit",
+            "reset"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IconButton",
+      "sourcePath": "components/actions/IconButton.jsx",
+      "props": [
+        {
+          "name": "icon",
+          "type": "string"
+        },
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "variant",
+          "values": [
+            "quiet",
+            "secondary"
+          ]
+        },
+        {
+          "name": "size",
+          "values": [
+            "S",
+            "M"
+          ]
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onPress",
+          "type": "() => void"
+        },
+        {
+          "name": "onClick",
+          "type": "React.MouseEventHandler<HTMLButtonElement>"
+        }
+      ]
+    },
+    {
+      "name": "Avatar",
+      "sourcePath": "components/content/Avatar.jsx",
+      "props": [
+        {
+          "name": "src",
+          "type": "string"
+        },
+        {
+          "name": "alt",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "size",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "name": "Icon",
+      "sourcePath": "components/content/Icon.jsx",
+      "props": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "size",
+          "type": "number"
+        },
+        {
+          "name": "color",
+          "type": "string"
+        },
+        {
+          "name": "className",
+          "type": "string"
+        },
+        {
+          "name": "style",
+          "type": "React.CSSProperties"
+        }
+      ]
+    },
+    {
+      "name": "Badge",
+      "sourcePath": "components/feedback/Badge.jsx",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "variant",
+          "values": [
+            "neutral",
+            "accent",
+            "positive",
+            "notice",
+            "negative"
+          ]
+        },
+        {
+          "name": "fillStyle",
+          "values": [
+            "bold",
+            "subtle"
+          ]
+        },
+        {
+          "name": "icon",
+          "type": "React.ReactNode"
+        }
+      ]
+    },
+    {
+      "name": "Dialog",
+      "sourcePath": "components/feedback/Dialog.jsx",
+      "props": [
+        {
+          "name": "isOpen",
+          "type": "boolean"
+        },
+        {
+          "name": "onClose",
+          "type": "() => void"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "footer",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "width",
+          "type": "number | string"
+        }
+      ]
+    },
+    {
+      "name": "ProgressBar",
+      "sourcePath": "components/feedback/ProgressBar.jsx",
+      "props": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": "number"
+        },
+        {
+          "name": "isIndeterminate",
+          "type": "boolean"
+        },
+        {
+          "name": "showValue",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "Toast",
+      "sourcePath": "components/feedback/Toast.jsx",
+      "props": [
+        {
+          "name": "toasts",
+          "type": "ToastItem[]"
+        },
+        {
+          "name": "onDismiss",
+          "type": "(id: string) => void"
+        }
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "sourcePath": "components/forms/Checkbox.jsx",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "isSelected",
+          "type": "boolean"
+        },
+        {
+          "name": "isIndeterminate",
+          "type": "boolean"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onChange",
+          "type": "React.ChangeEventHandler<HTMLInputElement>"
+        }
+      ]
+    },
+    {
+      "name": "Picker",
+      "sourcePath": "components/forms/Picker.jsx",
+      "props": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "items",
+          "type": "PickerItem[]"
+        },
+        {
+          "name": "selectedKey",
+          "type": "string"
+        },
+        {
+          "name": "defaultSelectedKey",
+          "type": "string"
+        },
+        {
+          "name": "placeholder",
+          "type": "string"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onSelectionChange",
+          "type": "(key: string) => void"
+        }
+      ]
+    },
+    {
+      "name": "SearchField",
+      "sourcePath": "components/forms/SearchField.jsx",
+      "props": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "placeholder",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "name": "defaultValue",
+          "type": "string"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onChange",
+          "type": "React.ChangeEventHandler<HTMLInputElement>"
+        },
+        {
+          "name": "onClear",
+          "type": "() => void"
+        }
+      ]
+    },
+    {
+      "name": "Switch",
+      "sourcePath": "components/forms/Switch.jsx",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "isSelected",
+          "type": "boolean"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "onChange",
+          "type": "React.ChangeEventHandler<HTMLInputElement>"
+        }
+      ]
+    },
+    {
+      "name": "TextField",
+      "sourcePath": "components/forms/TextField.jsx",
+      "props": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "errorMessage",
+          "type": "string"
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean"
+        },
+        {
+          "name": "placeholder",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "name": "defaultValue",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "onChange",
+          "type": "React.ChangeEventHandler<HTMLInputElement>"
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "sourcePath": "components/navigation/Menu.jsx",
+      "props": [
+        {
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "name": "icon",
+          "type": "string"
+        },
+        {
+          "name": "items",
+          "type": "MenuItem[]"
+        },
+        {
+          "name": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "accent",
+            "negative",
+            "quiet"
+          ]
+        },
+        {
+          "name": "size",
+          "values": [
+            "S",
+            "M",
+            "L",
+            "XL"
+          ]
+        },
+        {
+          "name": "onAction",
+          "type": "(key: string) => void"
+        }
+      ]
+    },
+    {
+      "name": "Tabs",
+      "sourcePath": "components/navigation/Tabs.jsx",
+      "props": [
+        {
+          "name": "items",
+          "type": "TabItem[]"
+        },
+        {
+          "name": "selectedKey",
+          "type": "string"
+        },
+        {
+          "name": "defaultSelectedKey",
+          "type": "string"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "onSelectionChange",
+          "type": "(key: string) => void"
+        }
+      ]
+    }
+  ],
+  "startingPoints": [
+    {
+      "name": "Button",
+      "path": "components/actions/Button.jsx",
+      "previewPath": "components/actions/actions.card.html",
+      "kind": "component",
+      "section": "Components",
+      "subtitle": "Spectrum 2 按钮：primary / secondary / accent / negative / outline，四种尺寸",
+      "viewport": "700x360"
+    },
+    {
+      "name": "TextField",
+      "path": "components/forms/TextField.jsx",
+      "previewPath": "components/forms/forms.card.html",
+      "kind": "component",
+      "section": "Components",
+      "subtitle": "带标签、说明与错误态的文本输入",
+      "viewport": "700x260"
+    },
+    {
+      "name": "shiyin",
+      "path": "ui_kits/shiyin/index.html",
+      "previewPath": "ui_kits/shiyin/index.html",
+      "kind": "screen",
+      "section": "UI kits",
+      "subtitle": "拾音：B 站收藏到本地播放，Spectrum 2 界面",
+      "viewport": "1440x900"
+    }
+  ],
+  "cards": [
+    {
+      "path": "ui_kits/shiyin/index.html",
+      "group": "拾音",
+      "viewport": "1440x900",
+      "subtitle": "搜索、收藏、播放与队列",
+      "name": "拾音 · 桌面"
+    },
+    {
+      "path": "guidelines/colors-palette.html",
+      "group": "Colors",
+      "viewport": "700x190",
+      "subtitle": "gray 与 accent 色阶（25–1000）",
+      "name": "Palette"
+    },
+    {
+      "path": "guidelines/colors-semantic.html",
+      "group": "Colors",
+      "viewport": "700x300",
+      "subtitle": "浅色与深色两套语义色",
+      "name": "Semantic colors"
+    },
+    {
+      "path": "components/actions/actions.card.html",
+      "group": "Components",
+      "viewport": "700x330",
+      "subtitle": "Button 的变体与尺寸、IconButton",
+      "name": "Actions"
+    },
+    {
+      "path": "components/content/content.card.html",
+      "group": "Components",
+      "viewport": "700x300",
+      "subtitle": "Avatar 尺寸与 S2 图标集",
+      "name": "Content"
+    },
+    {
+      "path": "components/feedback/feedback.card.html",
+      "group": "Components",
+      "viewport": "700x470",
+      "subtitle": "Badge、ProgressBar、Dialog、Toast",
+      "name": "Feedback"
+    },
+    {
+      "path": "components/forms/forms.card.html",
+      "group": "Components",
+      "viewport": "700x420",
+      "subtitle": "TextField、SearchField、Checkbox、Switch、Picker",
+      "name": "Forms"
+    },
+    {
+      "path": "components/navigation/navigation.card.html",
+      "group": "Components",
+      "viewport": "700x300",
+      "subtitle": "Tabs 与 Menu",
+      "name": "Navigation"
+    },
+    {
+      "path": "guidelines/elevation.html",
+      "group": "Elevation",
+      "viewport": "700x160",
+      "subtitle": "浮层与强调阴影",
+      "name": "Elevation"
+    },
+    {
+      "path": "guidelines/radius.html",
+      "group": "Spacing",
+      "viewport": "700x150",
+      "subtitle": "sm 4 / md 8 / lg 10 / xl 16 / full",
+      "name": "Corner radius"
+    },
+    {
+      "path": "guidelines/spacing.html",
+      "group": "Spacing",
+      "viewport": "700x210",
+      "subtitle": "4px 基准的间距阶梯 50–1000",
+      "name": "Spacing"
+    },
+    {
+      "path": "guidelines/type-scale.html",
+      "group": "Type",
+      "viewport": "700x320",
+      "subtitle": "heading / title / body / detail / code",
+      "name": "Type scale"
+    }
+  ],
+  "globalCssPaths": [
+    "tokens/theme.css",
+    "tokens/base.css",
+    "components/components.css",
+    "styles.css"
+  ],
+  "tokens": [
+    {
+      "name": "--s2-font-sans",
+      "value": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", system-ui, sans-serif",
+      "kind": "font",
+      "definedIn": "tokens/theme.css",
+      "annotation": "font"
+    },
+    {
+      "name": "--s2-font-serif",
+      "value": "\"Source Serif 4\", \"Songti SC\", \"Noto Serif SC\", Georgia, serif",
+      "kind": "font",
+      "definedIn": "tokens/theme.css",
+      "annotation": "font"
+    },
+    {
+      "name": "--s2-font-code",
+      "value": "\"Source Code Pro\", ui-monospace, \"SF Mono\", Menlo, monospace",
+      "kind": "font",
+      "definedIn": "tokens/theme.css",
+      "annotation": "font"
+    },
+    {
+      "name": "--s2-font-size-25",
+      "value": "10px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-50",
+      "value": "11px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-75",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-100",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-200",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-300",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-400",
+      "value": "20px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-font-size-500",
+      "value": "22px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-xxs",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-xs",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-s",
+      "value": "20px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-m",
+      "value": "22px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-l",
+      "value": "28px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-xl",
+      "value": "36px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-xxl",
+      "value": "45px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-heading-xxxl",
+      "value": "58px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-xs",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-s",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-m",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-l",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-xl",
+      "value": "20px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-xxl",
+      "value": "22px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-title-xxxl",
+      "value": "25px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-xs",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-s",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-m",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-l",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-xl",
+      "value": "20px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-xxl",
+      "value": "22px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-body-xxxl",
+      "value": "25px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-detail-s",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-detail-m",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-detail-l",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-detail-xl",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-code-xs",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-code-s",
+      "value": "14px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-code-m",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-code-l",
+      "value": "18px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-code-xl",
+      "value": "20px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-line-height-100",
+      "value": "1.3",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-line-height-200",
+      "value": "1.5",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-body-line-height",
+      "value": "1.5",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-space-50",
+      "value": "2px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-75",
+      "value": "4px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-100",
+      "value": "8px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-200",
+      "value": "12px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-300",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-400",
+      "value": "24px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-500",
+      "value": "32px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-600",
+      "value": "40px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-700",
+      "value": "48px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-800",
+      "value": "64px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-900",
+      "value": "80px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-space-1000",
+      "value": "96px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-none",
+      "value": "0px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-sm",
+      "value": "4px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-md",
+      "value": "8px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-lg",
+      "value": "10px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-xl",
+      "value": "16px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-radius-full",
+      "value": "9999px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-width-100",
+      "value": "1px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-width-200",
+      "value": "2px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-width-400",
+      "value": "4px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-weight-normal",
+      "value": "400",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-weight-medium",
+      "value": "500",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-weight-bold",
+      "value": "700",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-duration",
+      "value": "150ms",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-ease",
+      "value": "cubic-bezier(0.45, 0, 0.4, 1)",
+      "kind": "other",
+      "definedIn": "tokens/theme.css",
+      "annotation": "other"
+    },
+    {
+      "name": "--s2-control-height-s",
+      "value": "24px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-control-height-m",
+      "value": "32px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-control-height-l",
+      "value": "40px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-control-height-xl",
+      "value": "48px",
+      "kind": "spacing",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-25",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-50",
+      "value": "rgb(248, 248, 248)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-75",
+      "value": "rgb(243, 243, 243)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-100",
+      "value": "rgb(233, 233, 233)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-200",
+      "value": "rgb(225, 225, 225)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-300",
+      "value": "rgb(218, 218, 218)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-400",
+      "value": "rgb(198, 198, 198)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-500",
+      "value": "rgb(143, 143, 143)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-600",
+      "value": "rgb(113, 113, 113)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-700",
+      "value": "rgb(80, 80, 80)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-800",
+      "value": "rgb(41, 41, 41)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-900",
+      "value": "rgb(19, 19, 19)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-1000",
+      "value": "rgb(0, 0, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-100",
+      "value": "rgb(245, 249, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-200",
+      "value": "rgb(229, 240, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-300",
+      "value": "rgb(203, 226, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-400",
+      "value": "rgb(172, 207, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-500",
+      "value": "rgb(142, 185, 252)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-600",
+      "value": "rgb(114, 158, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-700",
+      "value": "rgb(93, 137, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-800",
+      "value": "rgb(75, 117, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-900",
+      "value": "rgb(59, 99, 251)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1000",
+      "value": "rgb(39, 77, 234)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1100",
+      "value": "rgb(29, 62, 207)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1200",
+      "value": "rgb(21, 50, 173)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1300",
+      "value": "rgb(16, 40, 140)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-100",
+      "value": "rgba(255, 255, 255, 0.11)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-200",
+      "value": "rgba(255, 255, 255, 0.14)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-300",
+      "value": "rgba(255, 255, 255, 0.17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-400",
+      "value": "rgba(255, 255, 255, 0.21)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-500",
+      "value": "rgba(255, 255, 255, 0.39)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-600",
+      "value": "rgba(255, 255, 255, 0.51)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-700",
+      "value": "rgba(255, 255, 255, 0.66)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-800",
+      "value": "rgba(255, 255, 255, 0.85)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-900",
+      "value": "rgba(255, 255, 255, 0.94)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-1000",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-100",
+      "value": "rgba(0, 0, 0, 0.09)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-200",
+      "value": "rgba(0, 0, 0, 0.12)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-300",
+      "value": "rgba(0, 0, 0, 0.15)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-400",
+      "value": "rgba(0, 0, 0, 0.22)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-500",
+      "value": "rgba(0, 0, 0, 0.44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-600",
+      "value": "rgba(0, 0, 0, 0.56)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-700",
+      "value": "rgba(0, 0, 0, 0.69)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-800",
+      "value": "rgba(0, 0, 0, 0.84)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-900",
+      "value": "rgba(0, 0, 0, 0.93)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-1000",
+      "value": "rgb(0, 0, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-base",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-1",
+      "value": "rgb(248, 248, 248)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-2",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-pasteboard",
+      "value": "rgb(233, 233, 233)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-elevated",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg",
+      "value": "rgb(41, 41, 41)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subdued",
+      "value": "rgb(80, 80, 80)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subtle",
+      "value": "rgb(233, 233, 233)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-disabled-bg",
+      "value": "rgb(233, 233, 233)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg",
+      "value": "rgb(59, 99, 251)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg-subtle",
+      "value": "rgb(229, 240, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg",
+      "value": "rgb(215, 50, 32)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg-subtle",
+      "value": "rgb(255, 235, 232)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg",
+      "value": "rgb(5, 131, 78)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg-subtle",
+      "value": "rgb(215, 247, 225)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg",
+      "value": "rgb(59, 99, 251)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg-subtle",
+      "value": "rgb(229, 240, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg",
+      "value": "rgb(252, 125, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg-subtle",
+      "value": "rgb(255, 236, 207)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-heading",
+      "value": "rgb(19, 19, 19)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-title",
+      "value": "rgb(19, 19, 19)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-body",
+      "value": "rgb(41, 41, 41)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-detail",
+      "value": "rgb(113, 113, 113)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-code",
+      "value": "rgb(41, 41, 41)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-neutral",
+      "value": "rgb(41, 41, 41)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-subdued",
+      "value": "rgb(80, 80, 80)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-accent",
+      "value": "rgb(59, 99, 251)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-negative",
+      "value": "rgb(215, 50, 32)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-disabled",
+      "value": "rgb(198, 198, 198)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-negative",
+      "value": "rgb(215, 50, 32)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-disabled",
+      "value": "rgb(218, 218, 218)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-focus-ring",
+      "value": "rgb(75, 117, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-elevated",
+      "value": "0 2px 8px rgba(0, 0, 0, 0.16)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-emphasized",
+      "value": "0 1px 6px rgba(0, 0, 0, 0.12)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-25",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-50",
+      "value": "rgb(27, 27, 27)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-75",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-100",
+      "value": "rgb(44, 44, 44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-200",
+      "value": "rgb(50, 50, 50)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-300",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-400",
+      "value": "rgb(68, 68, 68)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-500",
+      "value": "rgb(109, 109, 109)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-600",
+      "value": "rgb(138, 138, 138)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-700",
+      "value": "rgb(175, 175, 175)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-800",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-900",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-1000",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-100",
+      "value": "rgb(14, 23, 63)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-200",
+      "value": "rgb(15, 28, 82)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-300",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-400",
+      "value": "rgb(18, 45, 154)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-500",
+      "value": "rgb(26, 58, 195)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-600",
+      "value": "rgb(37, 73, 229)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-700",
+      "value": "rgb(52, 91, 248)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-800",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-900",
+      "value": "rgb(86, 129, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1000",
+      "value": "rgb(105, 149, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1100",
+      "value": "rgb(124, 169, 252)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1200",
+      "value": "rgb(152, 192, 252)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1300",
+      "value": "rgb(181, 213, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-100",
+      "value": "rgba(255, 255, 255, 0.11)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-200",
+      "value": "rgba(255, 255, 255, 0.14)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-300",
+      "value": "rgba(255, 255, 255, 0.17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-400",
+      "value": "rgba(255, 255, 255, 0.21)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-500",
+      "value": "rgba(255, 255, 255, 0.39)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-600",
+      "value": "rgba(255, 255, 255, 0.51)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-700",
+      "value": "rgba(255, 255, 255, 0.66)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-800",
+      "value": "rgba(255, 255, 255, 0.85)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-900",
+      "value": "rgba(255, 255, 255, 0.94)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-1000",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-100",
+      "value": "rgba(0, 0, 0, 0.09)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-200",
+      "value": "rgba(0, 0, 0, 0.12)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-300",
+      "value": "rgba(0, 0, 0, 0.15)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-400",
+      "value": "rgba(0, 0, 0, 0.22)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-500",
+      "value": "rgba(0, 0, 0, 0.44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-600",
+      "value": "rgba(0, 0, 0, 0.56)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-700",
+      "value": "rgba(0, 0, 0, 0.69)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-800",
+      "value": "rgba(0, 0, 0, 0.84)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-900",
+      "value": "rgba(0, 0, 0, 0.93)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-1000",
+      "value": "rgb(0, 0, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-base",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-1",
+      "value": "rgb(27, 27, 27)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-2",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-pasteboard",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-elevated",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subdued",
+      "value": "rgb(109, 109, 109)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subtle",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-disabled-bg",
+      "value": "rgb(44, 44, 44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg-subtle",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg",
+      "value": "rgb(223, 52, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg-subtle",
+      "value": "rgb(87, 17, 7)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg",
+      "value": "rgb(6, 136, 80)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg-subtle",
+      "value": "rgb(0, 51, 38)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg-subtle",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg",
+      "value": "rgb(224, 100, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg-subtle",
+      "value": "rgb(80, 27, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-heading",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-title",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-body",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-detail",
+      "value": "rgb(138, 138, 138)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-code",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-neutral",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-subdued",
+      "value": "rgb(175, 175, 175)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-accent",
+      "value": "rgb(86, 129, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-negative",
+      "value": "rgb(252, 67, 46)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-disabled",
+      "value": "rgb(68, 68, 68)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-negative",
+      "value": "rgb(252, 67, 46)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-disabled",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-focus-ring",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-elevated",
+      "value": "0 2px 8px rgba(0, 0, 0, 0.48)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-emphasized",
+      "value": "0 1px 6px rgba(0, 0, 0, 0.36)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-25",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-50",
+      "value": "rgb(27, 27, 27)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-75",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-100",
+      "value": "rgb(44, 44, 44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-200",
+      "value": "rgb(50, 50, 50)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-300",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-400",
+      "value": "rgb(68, 68, 68)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-500",
+      "value": "rgb(109, 109, 109)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-600",
+      "value": "rgb(138, 138, 138)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-700",
+      "value": "rgb(175, 175, 175)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-800",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-900",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-gray-1000",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-100",
+      "value": "rgb(14, 23, 63)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-200",
+      "value": "rgb(15, 28, 82)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-300",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-400",
+      "value": "rgb(18, 45, 154)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-500",
+      "value": "rgb(26, 58, 195)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-600",
+      "value": "rgb(37, 73, 229)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-700",
+      "value": "rgb(52, 91, 248)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-800",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-900",
+      "value": "rgb(86, 129, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1000",
+      "value": "rgb(105, 149, 254)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1100",
+      "value": "rgb(124, 169, 252)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1200",
+      "value": "rgb(152, 192, 252)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-1300",
+      "value": "rgb(181, 213, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-100",
+      "value": "rgba(255, 255, 255, 0.11)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-200",
+      "value": "rgba(255, 255, 255, 0.14)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-300",
+      "value": "rgba(255, 255, 255, 0.17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-400",
+      "value": "rgba(255, 255, 255, 0.21)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-500",
+      "value": "rgba(255, 255, 255, 0.39)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-600",
+      "value": "rgba(255, 255, 255, 0.51)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-700",
+      "value": "rgba(255, 255, 255, 0.66)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-800",
+      "value": "rgba(255, 255, 255, 0.85)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-900",
+      "value": "rgba(255, 255, 255, 0.94)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-white-1000",
+      "value": "rgb(255, 255, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-100",
+      "value": "rgba(0, 0, 0, 0.09)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-200",
+      "value": "rgba(0, 0, 0, 0.12)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-300",
+      "value": "rgba(0, 0, 0, 0.15)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-400",
+      "value": "rgba(0, 0, 0, 0.22)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-500",
+      "value": "rgba(0, 0, 0, 0.44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-600",
+      "value": "rgba(0, 0, 0, 0.56)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-700",
+      "value": "rgba(0, 0, 0, 0.69)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-800",
+      "value": "rgba(0, 0, 0, 0.84)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-900",
+      "value": "rgba(0, 0, 0, 0.93)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-transparent-black-1000",
+      "value": "rgb(0, 0, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-base",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-1",
+      "value": "rgb(27, 27, 27)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-layer-2",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-pasteboard",
+      "value": "rgb(17, 17, 17)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-background-elevated",
+      "value": "rgb(34, 34, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subdued",
+      "value": "rgb(109, 109, 109)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-neutral-bg-subtle",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-disabled-bg",
+      "value": "rgb(44, 44, 44)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-accent-bg-subtle",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg",
+      "value": "rgb(223, 52, 34)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-negative-bg-subtle",
+      "value": "rgb(87, 17, 7)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg",
+      "value": "rgb(6, 136, 80)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-positive-bg-subtle",
+      "value": "rgb(0, 51, 38)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-informative-bg-subtle",
+      "value": "rgb(12, 33, 117)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg",
+      "value": "rgb(224, 100, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-notice-bg-subtle",
+      "value": "rgb(80, 27, 0)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-heading",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-title",
+      "value": "rgb(242, 242, 242)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-body",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-detail",
+      "value": "rgb(138, 138, 138)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-code",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-neutral",
+      "value": "rgb(219, 219, 219)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-subdued",
+      "value": "rgb(175, 175, 175)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-accent",
+      "value": "rgb(86, 129, 255)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-negative",
+      "value": "rgb(252, 67, 46)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-text-disabled",
+      "value": "rgb(68, 68, 68)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-negative",
+      "value": "rgb(252, 67, 46)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-border-disabled",
+      "value": "rgb(57, 57, 57)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-focus-ring",
+      "value": "rgb(64, 105, 253)",
+      "kind": "color",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-elevated",
+      "value": "0 2px 8px rgba(0, 0, 0, 0.48)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--s2-shadow-emphasized",
+      "value": "0 1px 6px rgba(0, 0, 0, 0.36)",
+      "kind": "shadow",
+      "definedIn": "tokens/theme.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "transparent",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "var(--s2-text-neutral)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-border",
+      "value": "transparent",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "var(--s2-neutral-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "var(--s2-gray-25)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "var(--s2-gray-100)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "var(--s2-accent-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "#fff",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "var(--s2-negative-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "#fff",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "transparent",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-border",
+      "value": "var(--s2-gray-400)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "var(--s2-text-neutral)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-bg",
+      "value": "var(--s2-disabled-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-fg",
+      "value": "var(--s2-text-disabled)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--btn-border",
+      "value": "var(--s2-border-disabled)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-neutral-bg-subdued)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "#fff",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-accent-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-positive-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-notice-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-negative-bg)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-neutral-bg-subtle)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "var(--s2-text-neutral)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-accent-bg-subtle)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "var(--s2-text-accent)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-positive-bg-subtle)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "var(--s2-text-neutral)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-notice-bg-subtle)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "var(--s2-text-neutral)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-bg",
+      "value": "var(--s2-negative-bg-subtle)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    },
+    {
+      "name": "--badge-fg",
+      "value": "var(--s2-text-negative)",
+      "kind": "color",
+      "definedIn": "components/components.css"
+    }
+  ],
+  "themes": [],
+  "fonts": [],
+  "brandFonts": [],
+  "source": "spa"
+}

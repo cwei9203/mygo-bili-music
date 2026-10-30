@@ -49,13 +49,16 @@ func (s *Service) Resolve(ctx context.Context, bv, cid string) (Playback, error)
 		return Playback{}, errors.New("歌曲标识无效")
 	}
 	type segment struct {
-		URL string `json:"url"`
+		URL       string   `json:"url"`
+		BackupURL []string `json:"backup_url"`
 	}
 	type audio struct {
-		URL       string `json:"baseUrl"`
-		SnakeURL  string `json:"base_url"`
-		Bandwidth int    `json:"bandwidth"`
-		Codecs    string `json:"codecs"`
+		URL            string   `json:"baseUrl"`
+		SnakeURL       string   `json:"base_url"`
+		BackupURL      []string `json:"backupUrl"`
+		SnakeBackupURL []string `json:"backup_url"`
+		Bandwidth      int      `json:"bandwidth"`
+		Codecs         string   `json:"codecs"`
 	}
 	type response struct {
 		Dash *struct {
@@ -76,11 +79,10 @@ func (s *Service) Resolve(ctx context.Context, bv, cid string) (Playback, error)
 			if a.Codecs != "" && !strings.HasPrefix(a.Codecs, "mp4a") {
 				continue
 			}
-			u := a.URL
-			if u == "" {
-				u = a.SnakeURL
-			}
-			if validMedia(u) && (dest == "" || a.Bandwidth > bandwidth) {
+			candidates := append([]string{a.URL, a.SnakeURL}, a.BackupURL...)
+			candidates = append(candidates, a.SnakeBackupURL...)
+			u := supportedMedia(candidates)
+			if u != "" && (dest == "" || a.Bandwidth > bandwidth) {
 				dest = u
 				bandwidth = a.Bandwidth
 			}
@@ -98,11 +100,11 @@ func (s *Service) Resolve(ctx context.Context, bv, cid string) (Playback, error)
 		if len(data.DURL) != 1 {
 			return Playback{}, errors.New("没有可播放的音频或单段混合流")
 		}
-		dest = data.DURL[0].URL
+		dest = supportedMedia(append([]string{data.DURL[0].URL}, data.DURL[0].BackupURL...))
 		mixed = true
 	}
 	if !validMedia(dest) {
-		return Playback{}, errors.New("媒体地址不是受支持的 B站 CDN")
+		return Playback{}, errors.New("B站返回的主备播放地址均不可用，请稍后重试")
 	}
 	probe, err := http.NewRequestWithContext(ctx, "GET", dest, nil)
 	if err != nil {
@@ -218,4 +220,13 @@ func newMediaClient() *http.Client {
 		}
 		return nil
 	}}
+}
+
+func supportedMedia(candidates []string) string {
+	for _, candidate := range candidates {
+		if validMedia(candidate) {
+			return candidate
+		}
+	}
+	return ""
 }

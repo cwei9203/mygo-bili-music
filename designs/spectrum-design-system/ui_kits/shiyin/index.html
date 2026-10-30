@@ -1,0 +1,779 @@
+<!-- @startingPoint section="UI kits" subtitle="拾音：B 站收藏到本地播放，Spectrum 2 界面" viewport="1440x900" -->
+<!-- @dsCard group="拾音" viewport="1440x900" name="拾音 · 桌面" subtitle="搜索、收藏、播放与队列" -->
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>拾音 · Spectrum 2</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  html, body { height: 100%; }
+  #root { height: 100%; }
+  .sy-app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: var(--s2-background-base);
+    color: var(--s2-text-body);
+    font-family: var(--s2-font-sans);
+  }
+  .sy-body { flex: 1; min-height: 0; display: flex; }
+
+  /* ---------- 侧栏 ---------- */
+  .sy-side {
+    width: 248px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 12px 12px;
+    background: var(--s2-background-layer-1);
+    border-right: 1px solid var(--s2-gray-200);
+  }
+  .sy-brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; }
+  .sy-brand-mark {
+    width: 30px; height: 30px; display: grid; place-items: center;
+    border-radius: var(--s2-radius-md); background: var(--s2-accent-bg); color: #fff;
+    font-weight: 700; font-size: var(--s2-font-size-200);
+  }
+  .sy-brand-name { font-size: var(--s2-font-size-200); font-weight: 700; line-height: 1.2; color: var(--s2-text-heading); }
+  .sy-brand-tag { display: block; font-size: var(--s2-font-size-50); color: var(--s2-text-subdued); }
+  .sy-sec { display: flex; flex-direction: column; gap: 2px; }
+  .sy-sec-head {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 28px; padding: 0 4px 0 8px; margin-bottom: 2px;
+    font-size: var(--s2-font-size-50); color: var(--s2-text-subdued);
+  }
+  .sy-nav { display: flex; flex-direction: column; gap: 2px; }
+  .sy-nav-item {
+    display: flex; align-items: center; gap: 8px;
+    height: 32px; padding: 0 8px; border: 0; border-radius: var(--s2-radius-sm);
+    background: transparent; color: var(--s2-text-neutral);
+    font-size: var(--s2-font-size-100); text-align: start; cursor: pointer;
+    transition: background-color 120ms var(--s2-ease);
+  }
+  .sy-nav-item:hover { background: var(--s2-gray-100); }
+  .sy-nav-item:focus-visible { outline: 2px solid var(--s2-focus-ring); outline-offset: -2px; }
+  .sy-nav-item.is-active { background: var(--s2-gray-200); font-weight: 700; }
+  .sy-nav-item .count {
+    margin-inline-start: auto; font-size: var(--s2-font-size-50); color: var(--s2-text-subdued);
+    font-variant-numeric: tabular-nums;
+  }
+  .sy-side-foot {
+    margin-top: auto; padding: 12px 8px 0;
+    border-top: 1px solid var(--s2-gray-200);
+  }
+
+  /* ---------- 主区 ---------- */
+  .sy-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .sy-scroll { flex: 1; overflow-y: auto; padding: 28px 40px 40px; }
+  .sy-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .sy-title {
+    font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -.01em;
+    color: var(--s2-text-heading); overflow-wrap: anywhere;
+  }
+  .sy-meta { margin-top: 8px; font-size: var(--s2-font-size-75); color: var(--s2-text-subdued); }
+  .sy-toolbar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 0; border-bottom: 1px solid var(--s2-gray-200);
+  }
+  .sy-toolbar .spacer { flex: 1; }
+
+  .sy-list { display: flex; flex-direction: column; }
+  .sy-row {
+    display: flex; align-items: center; gap: 12px;
+    height: 56px; padding: 0 10px 0 8px;
+    border-bottom: 1px solid var(--s2-gray-200); border-radius: var(--s2-radius-sm);
+    cursor: pointer;
+    transition: background-color 120ms var(--s2-ease);
+  }
+  .sy-row:hover { background: var(--s2-gray-100); }
+  .sy-row:focus-visible { outline: 2px solid var(--s2-focus-ring); outline-offset: -2px; }
+  .sy-row.is-playing .sy-row-title { color: var(--s2-text-accent); }
+  .sy-row-check { display: flex; align-items: center; flex: none; }
+  .sy-row-check .s2-check { gap: 0; }
+  .sy-row.is-selected { background: var(--s2-gray-100); }
+  .sy-row.is-dragging { opacity: .45; }
+  .sy-row.is-drop { box-shadow: inset 0 2px 0 var(--s2-accent-bg); }
+  .sy-batch-count { font-size: var(--s2-font-size-100); font-weight: 700; color: var(--s2-text-heading); }
+  .sy-keys { display: flex; flex-direction: column; gap: 10px; }
+  .sy-keys__row { display: grid; grid-template-columns: 124px 1fr; align-items: center; gap: 12px; font-size: var(--s2-font-size-100); }
+  .sy-keys kbd {
+    justify-self: start; padding: 2px 6px;
+    border: 1px solid var(--s2-gray-300); border-radius: var(--s2-radius-sm);
+    background: var(--s2-gray-100); color: var(--s2-text-neutral);
+    font-family: var(--s2-font-code); font-size: var(--s2-font-size-50);
+  }
+  .sy-row-avatar { position: relative; flex: none; width: 32px; height: 32px; }
+  .sy-row-play {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    border-radius: 50%; background: rgba(0, 0, 0, .58); color: #fff;
+    opacity: 0; transition: opacity 120ms var(--s2-ease);
+  }
+  .sy-row:hover .sy-row-play,
+  .sy-row:focus-visible .sy-row-play { opacity: 1; }
+  .sy-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .sy-row-title {
+    font-size: var(--s2-font-size-100); font-weight: 500; color: var(--s2-text-neutral);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sy-row-sub {
+    font-size: var(--s2-font-size-75); color: var(--s2-text-subdued);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sy-row-dur {
+    font-family: var(--s2-font-code); font-size: var(--s2-font-size-50);
+    color: var(--s2-text-subdued); font-variant-numeric: tabular-nums;
+  }
+  .sy-row-actions { display: flex; align-items: center; gap: 2px; opacity: 0; transition: opacity 120ms var(--s2-ease); }
+  .sy-row:hover .sy-row-actions,
+  .sy-row:focus-within .sy-row-actions { opacity: 1; }
+
+  .sy-empty {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 80px 20px; text-align: center;
+  }
+  .sy-empty h3 { font-size: var(--s2-font-size-300); font-weight: 700; color: var(--s2-text-heading); }
+  .sy-empty p { max-width: 34ch; font-size: var(--s2-font-size-100); color: var(--s2-text-subdued); }
+
+  /* ---------- 播放条 ---------- */
+  .sy-player {
+    flex: none; height: 80px; z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 560px) minmax(0, 1fr);
+    align-items: center; gap: 24px;
+    padding: 0 20px;
+    background: var(--s2-background-layer-2);
+    border-top: 1px solid var(--s2-gray-200);
+  }
+  .sy-np { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .sy-np-title {
+    font-size: var(--s2-font-size-100); font-weight: 700; color: var(--s2-text-neutral);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sy-np-sub {
+    font-size: var(--s2-font-size-50); color: var(--s2-text-subdued);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sy-player-center { display: flex; flex-direction: column; gap: 2px; }
+  .sy-controls { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .sy-controls .s2-btn {
+    width: 40px; height: 40px; min-width: 40px;
+    padding: 0; border-radius: var(--s2-radius-full);
+  }
+  .sy-progress { display: flex; align-items: center; gap: 10px; }
+  .sy-seek { position: relative; flex: 1; display: flex; align-items: center; height: 16px; }
+  .sy-seek .s2-progress { width: 100%; }
+  .sy-seek:hover .s2-progress__track { height: 6px; }
+  .sy-seek .s2-progress__track { transition: height 120ms var(--s2-ease); }
+  .sy-seek input {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    margin: 0; opacity: 0; cursor: pointer;
+  }
+  .sy-time {
+    min-width: 30px; font-size: var(--s2-font-size-50); color: var(--s2-text-subdued);
+    font-variant-numeric: tabular-nums;
+  }
+  .sy-time:last-child { text-align: end; }
+  .sy-player-right { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+  /* 菜单靠右、贴着窗口底部，弹出层要向上并向左展开 */
+  .sy-head .s2-popover,
+  .sy-player-right .s2-popover { left: auto; right: 0; }
+  .sy-player-right .s2-popover { top: auto; bottom: calc(100% + 56px); }
+
+  /* ---------- 队列 ---------- */
+  .sy-scrim {
+    position: absolute; inset: 0 0 80px 0; z-index: 2;
+    background: rgba(0, 0, 0, .28);
+    animation: sy-fade 150ms cubic-bezier(.45, 0, .4, 1);
+  }
+  .sy-queue {
+    position: absolute; top: 0; right: 0; bottom: 80px; z-index: 3;
+    width: 340px; display: flex; flex-direction: column;
+    background: var(--s2-background-layer-2);
+    border-left: 1px solid var(--s2-gray-200);
+    box-shadow: var(--s2-shadow-emphasized);
+    animation: sy-slide 150ms cubic-bezier(.45, 0, .4, 1);
+  }
+  .sy-queue-head {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 48px; padding: 0 12px 0 16px;
+    border-bottom: 1px solid var(--s2-gray-200);
+  }
+  .sy-queue-title { font-size: var(--s2-font-size-100); font-weight: 700; }
+  .sy-queue-body { flex: 1; overflow-y: auto; padding: 8px; }
+  .sy-qrow {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: 8px; border: 0; border-radius: var(--s2-radius-sm);
+    background: transparent; text-align: start; cursor: pointer;
+    transition: background-color 120ms var(--s2-ease);
+  }
+  .sy-qrow:hover { background: var(--s2-gray-100); }
+  .sy-qrow:focus-visible { outline: 2px solid var(--s2-focus-ring); outline-offset: -2px; }
+  .sy-qrow.is-playing .sy-row-title { color: var(--s2-text-accent); }
+
+  @keyframes sy-slide {
+    from { transform: translateX(24px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+  @keyframes sy-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .sy-app .s2-toast-region { bottom: 96px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Button, IconButton, SearchField, TextField, Checkbox, Badge, Avatar, ProgressBar, Toast, Menu, Switch, Dialog, Icon } = window.SpectrumDesignSystem_a44d86;
+
+const MODES = [
+  { id: 'list', label: '列表循环' },
+  { id: 'one', label: '单曲循环' },
+  { id: 'shuffle', label: '随机播放' },
+];
+
+const SHORTCUTS = [
+  ['空格', '播放 / 暂停'],
+  ['← →', '后退 / 前进 5 秒'],
+  ['Shift + ← →', '上一首 / 下一首'],
+  ['/', '搜索 B 站'],
+  ['?', '打开这个窗口'],
+  ['Esc', '关闭队列、对话框或退出搜索框'],
+];
+
+const TRACKS = [
+  { key: 't1', title: '夜航西飞', up: '迟到的电台', dur: 254 },
+  { key: 't2', title: '海边的房间', up: '木箱子', dur: 218 },
+  { key: 't3', title: '雨落在铁皮上', up: '木箱子', dur: 370 },
+  { key: 't4', title: '旧城环线', up: '南窗', dur: 285 },
+  { key: 't5', title: '十二点的便利店', up: '慢岛', dur: 201 },
+  { key: 't6', title: '冬眠', up: '南窗', dur: 192 },
+  { key: 't7', title: '潮汐表', up: '木箱子', dur: 333 },
+];
+
+const SEARCH = [
+  { key: 's1', title: '城市夜行 · 四段', up: '迟到的电台', dur: 977, parts: 4 },
+  { key: 's2', title: '夜车时刻表', up: '慢岛', dur: 288 },
+  { key: 's3', title: '雨夜合辑 · 十二首', up: '木箱子', dur: 2480 },
+  { key: 's4', title: '深夜电台 · 第 12 期', up: '南窗', dur: 3482, error: true },
+];
+
+const PLAYLISTS = [
+  { id: 'liked', name: '我喜欢', keys: ['t1', 't2', 't3', 't4', 't5', 't6'] },
+  { id: 'night', name: '夜航', keys: ['t1', 't5', 't6'] },
+  { id: 'code', name: '写代码', keys: ['t2', 't3', 't4'] },
+];
+
+const fmt = (sec) => `${Math.floor(sec / 60)}:${String(Math.round(sec % 60)).padStart(2, '0')}`;
+const findTrack = (key) => [...TRACKS, ...SEARCH].find((t) => t.key === key);
+
+function ShiyinApp() {
+  const [theme, setTheme] = React.useState('light');
+  const [view, setView] = React.useState('liked');
+  const [query, setQuery] = React.useState('');
+  const [playlists, setPlaylists] = React.useState(PLAYLISTS);
+  const [player, setPlayer] = React.useState({ key: 't1', playing: false, pos: 0, queue: PLAYLISTS[0].keys });
+  const [queueOpen, setQueueOpen] = React.useState(false);
+  const [toast, setToast] = React.useState(null);
+  const [fixedError, setFixedError] = React.useState(false);
+  const [dialog, setDialog] = React.useState(null);
+  const [nameDraft, setNameDraft] = React.useState('');
+  const [mode, setMode] = React.useState('list');
+  const [selected, setSelected] = React.useState([]);
+  const [dragKey, setDragKey] = React.useState(null);
+  const [overKey, setOverKey] = React.useState(null);
+
+  React.useEffect(() => {
+    if (!player.playing) return;
+    const timer = setInterval(() => {
+      setPlayer((p) => {
+        const track = findTrack(p.key);
+        if (!track) return p;
+        if (p.pos + 1 < track.dur) return { ...p, pos: p.pos + 1 };
+        if (mode === 'one') return { ...p, pos: 0 };
+        const index = p.queue.indexOf(p.key);
+        const next = mode === 'shuffle'
+          ? p.queue[Math.floor(Math.random() * p.queue.length)]
+          : p.queue[(index + 1) % p.queue.length];
+        return next ? { ...p, key: next, pos: 0 } : { ...p, playing: false, pos: track.dur };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [player.playing, mode]);
+
+  React.useEffect(() => { setSelected([]); }, [view]);
+
+  React.useEffect(() => {
+    if (!queueOpen) return;
+    const onKey = (event) => { if (event.key === 'Escape') setQueueOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [queueOpen]);
+
+  const playlist = playlists.find((p) => p.id === view);
+  const tracks = playlist ? playlist.keys.map(findTrack).filter(Boolean) : [];
+  const current = findTrack(player.key);
+  const queueTracks = player.queue.map(findTrack).filter(Boolean);
+  const pct = current ? (player.pos / current.dur) * 100 : 0;
+
+  const play = (key, queue) => setPlayer((p) => ({ ...p, key, queue: queue && queue.length ? queue : [key], playing: true, pos: 0 }));
+
+  const step = (delta) => {
+    const index = queueTracks.findIndex((t) => t.key === player.key);
+    const target = queueTracks[(index + delta + queueTracks.length) % queueTracks.length];
+    if (target) play(target.key, player.queue);
+  };
+
+  const nudge = (seconds) => setPlayer((p) => {
+    const track = findTrack(p.key);
+    if (!track) return p;
+    return { ...p, pos: Math.max(0, Math.min(track.dur, p.pos + seconds)) };
+  });
+
+  const toggleSelect = (key) => setSelected((keys) => keys.includes(key) ? keys.filter((k) => k !== key) : [...keys, key]);
+
+  const reorder = (fromKey, toKey) => {
+    if (!playlist || fromKey === toKey) return;
+    setPlaylists((lists) => lists.map((list) => {
+      if (list.id !== playlist.id) return list;
+      const keys = [...list.keys];
+      keys.splice(keys.indexOf(toKey), 0, keys.splice(keys.indexOf(fromKey), 1)[0]);
+      return { ...list, keys };
+    }));
+  };
+
+  const addSelectedTo = (targetId) => {
+    const target = playlists.find((list) => list.id === targetId);
+    if (!target) return;
+    const before = target.keys;
+    const keys = tracks.filter((track) => selected.includes(track.key)).map((track) => track.key);
+    setPlaylists((lists) => lists.map((list) => list.id === targetId ? { ...list, keys: [...new Set([...list.keys, ...keys])] } : list));
+    setSelected([]);
+    setToast({
+      id: String(Date.now()),
+      message: `已加入「${target.name}」 · ${keys.length} 首`,
+      actionLabel: '撤销',
+      onAction: () => setPlaylists((lists) => lists.map((list) => list.id === targetId ? { ...list, keys: before } : list)),
+    });
+  };
+
+  const removeSelected = () => {
+    if (!playlist) return;
+    const before = playlist.keys;
+    setPlaylists((lists) => lists.map((list) => list.id === playlist.id ? { ...list, keys: list.keys.filter((key) => !selected.includes(key)) } : list));
+    setSelected([]);
+    setToast({
+      id: String(Date.now()),
+      message: `已移出「${playlist.name}」 · ${selected.length} 首`,
+      actionLabel: '撤销',
+      onAction: () => setPlaylists((lists) => lists.map((list) => list.id === playlist.id ? { ...list, keys: before } : list)),
+    });
+  };
+
+  const shortcutRef = React.useRef(null);
+  shortcutRef.current = (event) => {
+    const typing = ['INPUT', 'TEXTAREA'].includes(event.target.tagName) || event.target.isContentEditable;
+    if (typing) {
+      if (event.key === 'Escape') event.target.blur();
+      return;
+    }
+    if (event.key === ' ') {
+      event.preventDefault();
+      setPlayer((p) => ({ ...p, playing: !p.playing }));
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      event.shiftKey ? step(1) : nudge(5);
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      event.shiftKey ? step(-1) : nudge(-5);
+    } else if (event.key === '/') {
+      event.preventDefault();
+      const input = document.querySelector('.sy-side input');
+      if (input) input.focus();
+    } else if (event.key === '?') {
+      setDialog('shortcuts');
+    }
+  };
+
+  React.useEffect(() => {
+    const onKey = (event) => shortcutRef.current(event);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const addToLiked = (track) => {
+    setPlaylists((lists) => lists.map((list) => list.id === 'liked' ? { ...list, keys: [...new Set([...list.keys, track.key])] } : list));
+    setToast({ id: String(Date.now()), message: `已加入「我喜欢」 · ${track.title}`, actionLabel: '撤销', onAction: () => setPlaylists((lists) => lists.map((list) => list.id === 'liked' ? { ...list, keys: list.keys.filter((k) => k !== track.key) } : list)) });
+  };
+
+  const removeFromLiked = (track) => {
+    setPlaylists((lists) => lists.map((list) => list.id === 'liked' ? { ...list, keys: list.keys.filter((k) => k !== track.key) } : list));
+    setToast({ id: String(Date.now()), message: `已移出「我喜欢」 · ${track.title}`, actionLabel: '撤销', onAction: () => setPlaylists((lists) => lists.map((list) => list.id === 'liked' ? { ...list, keys: [...list.keys, track.key] } : list)) });
+  };
+
+  const createList = () => {
+    const id = 'l' + Date.now();
+    setPlaylists((lists) => [...lists, { id, name: `新列表 ${lists.length}`, keys: [] }]);
+    setView(id);
+  };
+
+  const renameList = () => {
+    const name = nameDraft.trim();
+    if (name && playlist) setPlaylists((lists) => lists.map((list) => list.id === playlist.id ? { ...list, name } : list));
+    setDialog(null);
+  };
+
+  const deleteList = () => {
+    setPlaylists((lists) => lists.filter((list) => list.id !== playlist.id));
+    setView('liked');
+    setDialog(null);
+  };
+
+  const results = SEARCH.filter((item) => !query.trim() || item.title.includes(query.trim()) || item.up.includes(query.trim()));
+
+  const row = (track, queue, playing) => (
+    <div
+      key={track.key}
+      role="button"
+      tabIndex={0}
+      draggable={view !== 'search'}
+      className={
+        'sy-row'
+        + (playing ? ' is-playing' : '')
+        + (selected.includes(track.key) ? ' is-selected' : '')
+        + (dragKey === track.key ? ' is-dragging' : '')
+        + (overKey === track.key ? ' is-drop' : '')
+      }
+      onClick={() => play(track.key, queue)}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          play(track.key, queue);
+        }
+      }}
+      onDragStart={(event) => {
+        setDragKey(track.key);
+        event.dataTransfer.effectAllowed = 'move';
+      }}
+      onDragOver={(event) => {
+        if (!dragKey || dragKey === track.key) return;
+        event.preventDefault();
+        setOverKey(track.key);
+      }}
+      onDragLeave={() => setOverKey((key) => (key === track.key ? null : key))}
+      onDrop={(event) => {
+        event.preventDefault();
+        if (dragKey) reorder(dragKey, track.key);
+        setDragKey(null);
+        setOverKey(null);
+      }}
+      onDragEnd={() => {
+        setDragKey(null);
+        setOverKey(null);
+      }}
+    >
+      <span className="sy-row-check" onClick={(event) => event.stopPropagation()}>
+        <Checkbox
+          aria-label={`选择 ${track.title}`}
+          isSelected={selected.includes(track.key)}
+          onChange={() => toggleSelect(track.key)}
+        />
+      </span>
+      <span className="sy-row-avatar">
+        <Avatar name={track.title.slice(0, 1)} size={32} />
+        <span className="sy-row-play" aria-hidden="true"><Icon name="play" size={12} /></span>
+      </span>
+      <div className="sy-row-main">
+        <span className="sy-row-title">{track.title}</span>
+        <span className="sy-row-sub">{track.up}</span>
+      </div>
+      {track.parts ? <Badge variant="accent" fillStyle="subtle">{track.parts} 个分P</Badge> : null}
+      <span className="sy-row-dur">{fmt(track.dur)}</span>
+      <div className="sy-row-actions" onClick={(event) => event.stopPropagation()}>
+        <IconButton icon="add" label="加入我喜欢" size="S" onPress={() => addToLiked(track)} />
+        {view === 'liked' ? <IconButton icon="close" label="移出列表" size="S" onPress={() => removeFromLiked(track)} /> : null}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="sy-app" data-theme={theme}>
+      <div className="sy-body">
+        <aside className="sy-side">
+          <div className="sy-brand">
+            <span className="sy-brand-mark">拾</span>
+            <div>
+              <div className="sy-brand-name">拾音</div>
+              <span className="sy-brand-tag">收藏喜欢的声音</span>
+            </div>
+          </div>
+
+          <SearchField
+            placeholder="搜索 B 站"
+            value={query}
+            onChange={(event) => {
+              const next = event.target.value;
+              setQuery(next);
+              setView(next ? 'search' : 'liked');
+            }}
+          />
+
+          <div className="sy-sec">
+            <div className="sy-sec-head">
+              <span>列表</span>
+              <IconButton icon="add" label="新建列表" size="S" onPress={createList} />
+            </div>
+            <div className="sy-nav">
+              {playlists.map((list) => (
+                <button
+                  key={list.id}
+                  type="button"
+                  className={'sy-nav-item' + (view === list.id ? ' is-active' : '')}
+                  onClick={() => { setView(list.id); setQuery(''); }}
+                >
+                  {list.name}
+                  <span className="count">{list.keys.length}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="sy-side-foot">
+            <Switch isSelected={theme === 'dark'} onChange={(event) => setTheme(event.target.checked ? 'dark' : 'light')}>
+              深色模式
+            </Switch>
+          </div>
+        </aside>
+
+        <main className="sy-main">
+          <div className="sy-scroll">
+            {view === 'search' ? (
+              <>
+                <div className="sy-head">
+                  <div>
+                    <h1 className="sy-title">{query.trim() ? `“${query.trim()}”` : '搜索 B 站'}</h1>
+                    <div className="sy-meta">{results.length} 个稿件 · 点行播放，+ 收进「我喜欢」</div>
+                  </div>
+                </div>
+                <div className="sy-toolbar"><span className="spacer" /></div>
+                <div className="sy-list">
+                  {results.map((item) =>
+                    item.error && !fixedError ? (
+                      <div className="sy-row" key={item.key} style={{ cursor: 'default' }}>
+                        <Avatar name="深" size={32} />
+                        <div className="sy-row-main">
+                          <span className="sy-row-title">{item.title}</span>
+                          <span className="sy-row-sub" style={{ color: 'var(--s2-text-negative)' }}>B 站返回 412 · 稿件详情获取失败</span>
+                        </div>
+                        <Button variant="secondary" size="S" onPress={() => setFixedError(true)}>重试</Button>
+                      </div>
+                    ) : (
+                      row(item, results.map((r) => r.key), player.key === item.key)
+                    )
+                  )}
+                  {results.length === 0 ? (
+                    <div className="sy-empty">
+                      <h3>没有找到「{query}」</h3>
+                      <p>试试更短的关键词，或者直接搜 UP 主的名字。</p>
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="sy-head">
+                  <div>
+                    <h1 className="sy-title">{playlist ? playlist.name : '我喜欢'}</h1>
+                    <div className="sy-meta">
+                      {tracks.length} 首 · {Math.round(tracks.reduce((sum, t) => sum + t.dur, 0) / 60)} 分钟 · 拖动可排序
+                    </div>
+                  </div>
+                  {view === 'liked' ? null : (
+                    <Menu
+                      label="列表操作"
+                      items={[{ id: 'rename', label: '重命名', icon: 'edit' }, { id: 'delete', label: '删除列表', icon: 'close' }]}
+                      onAction={(id) => {
+                        if (id === 'rename') { setNameDraft(playlist ? playlist.name : ''); setDialog('rename'); }
+                        if (id === 'delete') setDialog('delete');
+                      }}
+                    />
+                  )}
+                </div>
+
+                <div className="sy-toolbar">
+                  {selected.length ? (
+                    <>
+                      <span className="sy-batch-count">已选 {selected.length} 首</span>
+                      <Menu
+                        label="加入列表"
+                        icon="add"
+                        items={playlists.filter((list) => list.id !== view).map((list) => ({ id: list.id, label: list.name }))}
+                        onAction={addSelectedTo}
+                      />
+                      <Button variant="secondary" onPress={removeSelected}>移出「{playlist ? playlist.name : ''}」</Button>
+                      <span className="spacer" />
+                      <Button variant="quiet" onPress={() => setSelected([])}>取消选择</Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="accent" icon="play" disabled={tracks.length === 0} onPress={() => tracks.length && play(tracks[0].key, playlist.keys)}>播放全部</Button>
+                      <Button variant="secondary" icon="shuffle" disabled={tracks.length === 0} onPress={() => tracks.length && play(tracks[Math.floor(Math.random() * tracks.length)].key, playlist.keys)}>随机</Button>
+                      <span className="spacer" />
+                      <Badge fillStyle="subtle">{tracks.length} 首</Badge>
+                    </>
+                  )}
+                </div>
+
+                {tracks.length === 0 ? (
+                  <div className="sy-empty">
+                    <h3>这个列表还是空的</h3>
+                    <p>去搜索一首歌，点 + 就收进来了。列表只存在这台 Mac。</p>
+                    <Button variant="accent" icon="search" onPress={() => setView('search')}>去搜索</Button>
+                  </div>
+                ) : (
+                  <div className="sy-list">
+                    {tracks.map((track) => row(track, playlist.keys, player.key === track.key))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </main>
+      </div>
+
+      <footer className="sy-player">
+        <div className="sy-np">
+          <Avatar name={current ? current.title.slice(0, 1) : '音'} size={40} />
+          <div style={{ minWidth: 0 }}>
+            <div className="sy-np-title">{current ? current.title : '未在播放'}</div>
+            <div className="sy-np-sub">{current ? current.up : '选一首歌开始'}</div>
+          </div>
+        </div>
+        <div className="sy-player-center">
+          <div className="sy-controls">
+            <IconButton icon="stepBack" label="上一首" onPress={() => step(-1)} />
+            <Button
+              variant="accent"
+              icon={player.playing ? 'pause' : 'play'}
+              aria-label={player.playing ? '暂停' : '播放'}
+              onPress={() => setPlayer((p) => ({ ...p, playing: !p.playing }))}
+            />
+            <IconButton icon="stepForward" label="下一首" onPress={() => step(1)} />
+          </div>
+          <div className="sy-progress">
+            <span className="sy-time">{fmt(player.pos)}</span>
+            <div className="sy-seek">
+              <ProgressBar value={pct} ariaLabel="播放进度" />
+              <input
+                type="range"
+                min="0"
+                max={current ? current.dur : 0}
+                value={player.pos}
+                aria-label="播放进度"
+                onChange={(event) => setPlayer((p) => ({ ...p, pos: Number(event.target.value) }))}
+              />
+            </div>
+            <span className="sy-time">{fmt(current ? current.dur : 0)}</span>
+          </div>
+        </div>
+        <div className="sy-player-right">
+          <Menu
+            label={(MODES.find((item) => item.id === mode) || MODES[0]).label}
+            size="S"
+            items={[
+              { id: 'list', label: '列表循环', icon: 'list' },
+              { id: 'one', label: '单曲循环', icon: 'music' },
+              { id: 'shuffle', label: '随机播放', icon: 'shuffle' },
+            ]}
+            onAction={setMode}
+          />
+          <IconButton icon="info" label="快捷键" onPress={() => setDialog('shortcuts')} />
+          <IconButton icon="list" label="播放队列" variant={queueOpen ? 'secondary' : 'quiet'} onPress={() => setQueueOpen(!queueOpen)} />
+        </div>
+      </footer>
+
+      {queueOpen ? (
+        <>
+          <div className="sy-scrim" onClick={() => setQueueOpen(false)} aria-hidden="true" />
+          <aside className="sy-queue" role="dialog" aria-label="播放队列">
+            <div className="sy-queue-head">
+              <span className="sy-queue-title">播放队列 · {queueTracks.length} 首</span>
+              <IconButton icon="close" label="关闭队列" size="S" onPress={() => setQueueOpen(false)} />
+            </div>
+            <div className="sy-queue-body">
+              {queueTracks.map((track) => (
+                <button key={track.key} type="button" className={'sy-qrow' + (track.key === player.key ? ' is-playing' : '')} onClick={() => play(track.key, player.queue)}>
+                  <Avatar name={track.title.slice(0, 1)} size={28} />
+                  <div className="sy-row-main">
+                    <span className="sy-row-title">{track.title}</span>
+                    <span className="sy-row-sub">{track.up}</span>
+                  </div>
+                  <span className="sy-row-dur">{fmt(track.dur)}</span>
+                </button>
+              ))}
+            </div>
+          </aside>
+        </>
+      ) : null}
+
+      <Dialog
+        isOpen={dialog === 'rename'}
+        onClose={() => setDialog(null)}
+        title="重命名列表"
+        footer={
+          <>
+            <Button variant="secondary" onPress={() => setDialog(null)}>取消</Button>
+            <Button variant="accent" onPress={renameList}>保存</Button>
+          </>
+        }
+      >
+        <TextField label="列表名称" value={nameDraft} onChange={(event) => setNameDraft(event.target.value)} isRequired autoFocus />
+      </Dialog>
+
+      <Dialog
+        isOpen={dialog === 'delete'}
+        onClose={() => setDialog(null)}
+        title={playlist ? `删除「${playlist.name}」？` : '删除列表？'}
+        footer={
+          <>
+            <Button variant="secondary" onPress={() => setDialog(null)}>取消</Button>
+            <Button variant="negative" onPress={deleteList}>删除</Button>
+          </>
+        }
+      >
+        列表里的歌不会被删除，只是不再出现在这个列表里。
+      </Dialog>
+
+      <Dialog
+        isOpen={dialog === 'shortcuts'}
+        onClose={() => setDialog(null)}
+        title="快捷键"
+        footer={<Button variant="secondary" onPress={() => setDialog(null)}>知道了</Button>}
+      >
+        <div className="sy-keys">
+          {SHORTCUTS.map(([keys, description]) => (
+            <div className="sy-keys__row" key={keys}>
+              <kbd>{keys}</kbd>
+              <span>{description}</span>
+            </div>
+          ))}
+        </div>
+      </Dialog>
+
+      {toast ? <Toast toasts={[toast]} onDismiss={() => setToast(null)} /> : null}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<ShiyinApp />);
+</script>
+</body>
+</html>

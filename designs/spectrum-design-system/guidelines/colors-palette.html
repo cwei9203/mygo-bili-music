@@ -1,0 +1,45 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Palette" subtitle="gray 与 accent 色阶（25–1000）" -->
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; padding:20px; background:var(--s2-background-base); font-family:var(--s2-font-sans); }
+  .ramp { display:flex; margin-bottom:18px; }
+  .step { flex:1; height:52px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px; font-size:9px; font-family:var(--s2-font-code); color:var(--s2-text-subdued); }
+  .cap { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--s2-text-subdued); margin-bottom:8px; }
+  .r2 .step { color:rgba(255,255,255,.75); }
+</style></head>
+<body>
+  <div class="cap">Gray</div>
+  <div class="ramp">
+    <div class="step" style="background:var(--s2-gray-25)">25</div>
+    <div class="step" style="background:var(--s2-gray-50)">50</div>
+    <div class="step" style="background:var(--s2-gray-75)">75</div>
+    <div class="step" style="background:var(--s2-gray-100)">100</div>
+    <div class="step" style="background:var(--s2-gray-200)">200</div>
+    <div class="step" style="background:var(--s2-gray-300)">300</div>
+    <div class="step" style="background:var(--s2-gray-400)">400</div>
+    <div class="step" style="background:var(--s2-gray-500)">500</div>
+    <div class="step" style="background:var(--s2-gray-600)">600</div>
+    <div class="step" style="background:var(--s2-gray-700)">700</div>
+    <div class="step" style="background:var(--s2-gray-800);color:rgba(255,255,255,.8)">800</div>
+    <div class="step" style="background:var(--s2-gray-900);color:rgba(255,255,255,.8)">900</div>
+    <div class="step" style="background:var(--s2-gray-1000);color:rgba(255,255,255,.8)">1000</div>
+  </div>
+  <div class="cap">Accent</div>
+  <div class="ramp r2">
+    <div class="step" style="background:var(--s2-accent-100)">100</div>
+    <div class="step" style="background:var(--s2-accent-200)">200</div>
+    <div class="step" style="background:var(--s2-accent-300)">300</div>
+    <div class="step" style="background:var(--s2-accent-400)">400</div>
+    <div class="step" style="background:var(--s2-accent-500)">500</div>
+    <div class="step" style="background:var(--s2-accent-600)">600</div>
+    <div class="step" style="background:var(--s2-accent-700)">700</div>
+    <div class="step" style="background:var(--s2-accent-800)">800</div>
+    <div class="step" style="background:var(--s2-accent-900)">900</div>
+    <div class="step" style="background:var(--s2-accent-1000)">1000</div>
+    <div class="step" style="background:var(--s2-accent-1100)">1100</div>
+    <div class="step" style="background:var(--s2-accent-1200)">1200</div>
+    <div class="step" style="background:var(--s2-accent-1300)">1300</div>
+  </div>
+</body></html>

@@ -11,7 +11,10 @@ export function shuffled<T>(items: T[], random = Math.random) {
 export class Queue {
   ids: string[] = [];
   current: string | null = null;
-  mode: Mode = "顺序播放";
+  mode: Mode;
+  constructor(savedMode: string | null = null) {
+    this.mode = modes.find((mode) => mode === savedMode) ?? "顺序播放";
+  }
   remaining: string[] = [];
   visited = new Set<string>();
   history: string[] = [];

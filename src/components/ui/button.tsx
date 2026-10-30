@@ -4,16 +4,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:pointer-events-none disabled:opacity-50 min-h-11 px-3",
+  "inline-flex min-h-9 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-3.5 text-[13px] font-medium transition-[background-color,color,border-color,transform] duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)] disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
-        default: "bg-[#486d9b] text-white hover:bg-[#385b87]",
-        ghost: "hover:bg-slate-100 text-slate-700",
-        outline: "border border-slate-200 bg-white hover:bg-slate-50",
-        destructive: "bg-red-600 text-white hover:bg-red-700",
+        default:
+          "bg-[var(--solid)] text-[var(--on-solid)] hover:bg-[var(--solid-hover)] disabled:bg-[var(--hover-strong)] disabled:text-[var(--ink-3)] disabled:opacity-100",
+        ghost: "text-[var(--ink-2)] hover:bg-[var(--hover)] hover:text-[var(--ink)]",
+        outline: "border border-[var(--line-2)] text-[var(--ink)] hover:bg-[var(--hover)]",
+        destructive:
+          "border border-[var(--danger-line)] bg-[var(--danger-bg)] text-[var(--danger)] hover:bg-[var(--danger-bg-hover)]",
       },
-      size: { default: "", icon: "w-11 shrink-0 px-0" },
+      size: { default: "", icon: "w-9 shrink-0 px-0" },
     },
     defaultVariants: { variant: "default", size: "default" },
   },

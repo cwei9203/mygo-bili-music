@@ -1,0 +1,88 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Forms" subtitle="TextField、SearchField、Checkbox、Switch、Picker" -->
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--s2-background-base); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--s2-text-subdued); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { TextField, SearchField, Checkbox, Switch, Picker } = window.SpectrumDesignSystem_a44d86;
+
+function FormsCard() {
+  const [query, setQuery] = React.useState('夜航');
+  const [checked, setChecked] = React.useState(true);
+  const [mixed, setMixed] = React.useState(true);
+  const [switched, setSwitched] = React.useState(true);
+  const [mode, setMode] = React.useState('loop');
+
+  return (
+    <div className="grid">
+      <div className="stack">
+        <div>
+          <div className="label">Text field</div>
+          <div className="stack">
+            <TextField label="列表名称" placeholder="例如：夜航" isRequired />
+            <TextField label="搜索关键词" defaultValue="电台" description="支持稿件标题、UP 主" />
+            <TextField label="无效输入" defaultValue="BV1??" errorMessage="BV 号格式不正确" />
+            <TextField label="已禁用" defaultValue="不可编辑" isDisabled />
+          </div>
+        </div>
+        <div>
+          <div className="label">Search</div>
+          <SearchField placeholder="搜索 B 站" value={query} onChange={(e) => setQuery(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="stack">
+        <div>
+          <div className="label">Checkbox</div>
+          <div className="stack">
+            <Checkbox isSelected={checked} onChange={(e) => setChecked(e.target.checked)}>收藏后自动播放</Checkbox>
+            <Checkbox isSelected={false}>只显示音频稿件</Checkbox>
+            <Checkbox isIndeterminate={mixed} isSelected onChange={(e) => setMixed(false)}>已选 2 / 4 个分P</Checkbox>
+            <Checkbox isDisabled isSelected>已禁用</Checkbox>
+          </div>
+        </div>
+        <div>
+          <div className="label">Switch</div>
+          <div className="stack">
+            <Switch isSelected={switched} onChange={(e) => setSwitched(e.target.checked)}>深色模式</Switch>
+            <Switch isSelected={false}>关闭窗口时继续播放</Switch>
+            <Switch isDisabled isSelected>已禁用</Switch>
+          </div>
+        </div>
+        <div>
+          <div className="label">Picker</div>
+          <Picker
+            label="播放模式"
+            selectedKey={mode}
+            onSelectionChange={setMode}
+            items={[
+              { id: 'sequential', label: '顺序播放' },
+              { id: 'loop', label: '列表循环' },
+              { id: 'single', label: '单曲循环' },
+              { id: 'shuffle', label: '随机播放' },
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<FormsCard />);
+</script>
+</body>
+</html>

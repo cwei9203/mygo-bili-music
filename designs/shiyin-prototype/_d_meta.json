@@ -1,0 +1,23 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "拾音 · 交互原型": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-10-30T02:58:30.885Z",
+          "status": "needs-review",
+          "subtitle": "三个视觉方向 + 窄窗，同一套可点击流程",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          }
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-10-30T02:58:30.886Z",
+  "updatedAt": "2026-10-30T02:58:30.886Z"
+}

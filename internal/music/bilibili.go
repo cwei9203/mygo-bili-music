@@ -26,17 +26,23 @@ import (
 const userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
 
 type Service struct {
-	db        *sql.DB
-	initError string
-	libraryMu sync.Mutex
-	client    *http.Client
-	media     *http.Client
-	keyMu     sync.Mutex
-	key       string
-	keyTime   time.Time
-	streamsMu sync.Mutex
-	streams   map[string]stream
-	baseURL   string
+	db          *sql.DB
+	initError   string
+	libraryPath string
+	libraryMu   sync.Mutex
+	client      *http.Client
+	media       *http.Client
+	keyMu       sync.Mutex
+	key         string
+	keyTime     time.Time
+	streamsMu   sync.Mutex
+	streams     map[string]stream
+	baseURL     string
+
+	discoverMu    sync.Mutex
+	discoverDeck  []Video
+	discoverTime  time.Time
+	discoverFetch func(context.Context) ([]Video, error)
 }
 
 func NewService() *Service {
@@ -44,6 +50,7 @@ func NewService() *Service {
 	return &Service{client: &http.Client{Jar: jar, Timeout: 25 * time.Second}, media: newMediaClient(), streams: make(map[string]stream)}
 }
 func Init(s *Service, path string) error {
+	s.libraryPath = path
 	db, err := OpenLibrary(path)
 	if err != nil {
 		s.initError = err.Error()
@@ -186,6 +193,7 @@ func (s *Service) wbi(ctx context.Context) (string, error) {
 }
 
 type Video struct {
+	Views    *int64 `json:"views"`
 	BV       string `json:"bv"`
 	Title    string `json:"title"`
 	Uploader string `json:"uploader"`
@@ -233,6 +241,7 @@ func (s *Service) Search(ctx context.Context, keyword, kind string, page int) (S
 			Author   string      `json:"author"`
 			Pic      string      `json:"pic"`
 			Duration string      `json:"duration"`
+			Play     *int64      `json:"play"`
 			Mid      json.Number `json:"mid"`
 			Name     string      `json:"uname"`
 			Avatar   string      `json:"upic"`
@@ -250,7 +259,7 @@ func (s *Service) Search(ctx context.Context, keyword, kind string, page int) (S
 			if !bvPattern.MatchString(r.BV) {
 				continue
 			}
-			out.Videos = append(out.Videos, Video{r.BV, plain(r.Title), r.Author, imageURL(r.Pic), r.Duration})
+			out.Videos = append(out.Videos, Video{BV: r.BV, Title: plain(r.Title), Uploader: r.Author, Cover: imageURL(r.Pic), Duration: r.Duration, Views: r.Play})
 		} else {
 			if !idPattern.MatchString(string(r.Mid)) {
 				continue
@@ -301,6 +310,7 @@ func (s *Service) Submissions(ctx context.Context, mid string, page int, keyword
 				Author string `json:"author"`
 				Pic    string `json:"pic"`
 				Length string `json:"length"`
+				Play   *int64 `json:"play"`
 			} `json:"vlist"`
 		} `json:"list"`
 	}](ctx, s, "/x/space/wbi/arc/search", params, true)
@@ -313,13 +323,15 @@ func (s *Service) Submissions(ctx context.Context, mid string, page int, keyword
 	out.HasMore = page*30 < *data.Page.Count
 	for _, v := range data.List.Videos {
 		if bvPattern.MatchString(v.BV) {
-			out.Videos = append(out.Videos, Video{v.BV, v.Title, v.Author, imageURL(v.Pic), v.Length})
+			out.Videos = append(out.Videos, Video{BV: v.BV, Title: v.Title, Uploader: v.Author, Cover: imageURL(v.Pic), Duration: v.Length, Views: v.Play})
 		}
 	}
 	return out, nil
 }
 
 type Collection struct {
+	Cover string `json:"cover"`
+	Count *int   `json:"count"`
 	ID    string `json:"id"`
 	MID   string `json:"mid"`
 	Title string `json:"title"`
@@ -376,7 +388,7 @@ func (s *Service) Detail(ctx context.Context, bv string) (Detail, error) {
 		if mid == "" || mid == "0" {
 			mid = string(data.Owner.Mid)
 		}
-		out.Collection = &Collection{string(data.Season.ID), mid, data.Season.Title, "season"}
+		out.Collection = &Collection{ID: string(data.Season.ID), MID: mid, Title: data.Season.Title, Kind: "season"}
 	}
 	return out, nil
 }
@@ -395,6 +407,8 @@ func (s *Service) Collections(ctx context.Context, mid string, page int) (Collec
 		ID       json.Number `json:"season_id"`
 		SeriesID json.Number `json:"series_id"`
 		Name     string      `json:"name"`
+		Cover    string      `json:"cover"`
+		Total    *int        `json:"total"`
 	}
 	type entry struct {
 		Meta meta `json:"meta"`
@@ -416,10 +430,10 @@ func (s *Service) Collections(ctx context.Context, mid string, page int) (Collec
 	}
 	out.HasMore = page*20 < *data.Items.Page.Total
 	for _, e := range data.Items.Seasons {
-		out.Items = append(out.Items, Collection{string(e.Meta.ID), mid, e.Meta.Name, "season"})
+		out.Items = append(out.Items, Collection{ID: string(e.Meta.ID), MID: mid, Title: e.Meta.Name, Kind: "season", Cover: imageURL(e.Meta.Cover), Count: e.Meta.Total})
 	}
 	for _, e := range data.Items.Series {
-		out.Items = append(out.Items, Collection{string(e.Meta.SeriesID), mid, e.Meta.Name, "series"})
+		out.Items = append(out.Items, Collection{ID: string(e.Meta.SeriesID), MID: mid, Title: e.Meta.Name, Kind: "series", Cover: imageURL(e.Meta.Cover), Count: e.Meta.Total})
 	}
 	return out, nil
 }
@@ -442,6 +456,9 @@ func (s *Service) CollectionItems(ctx context.Context, c Collection, page int) (
 			Title    string `json:"title"`
 			Pic      string `json:"pic"`
 			Duration int    `json:"duration"`
+			Stat     struct {
+				View *int64 `json:"view"`
+			} `json:"stat"`
 		} `json:"archives"`
 		Page struct {
 			Total *int `json:"total"`
@@ -456,7 +473,7 @@ func (s *Service) CollectionItems(ctx context.Context, c Collection, page int) (
 	out.HasMore = page*30 < *data.Page.Total
 	for _, v := range data.Archives {
 		if bvPattern.MatchString(v.BV) {
-			out.Videos = append(out.Videos, Video{v.BV, v.Title, "", imageURL(v.Pic), fmt.Sprintf("%d:%02d", v.Duration/60, v.Duration%60)})
+			out.Videos = append(out.Videos, Video{BV: v.BV, Title: v.Title, Cover: imageURL(v.Pic), Duration: fmt.Sprintf("%d:%02d", v.Duration/60, v.Duration%60), Views: v.Stat.View})
 		}
 	}
 	return out, nil

@@ -117,6 +117,14 @@ func TestGuestAPIs(t *testing.T) {
 	if len(videos.Videos) == 0 {
 		t.Fatal("no video")
 	}
+	discover, err := s.Discover(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("discover: %d, first %q", len(discover), discover[0].Title)
+	if len(discover) != discoverSize {
+		t.Fatalf("want %d recommendations, got %d", discoverSize, len(discover))
+	}
 	detail, err := s.Detail(ctx, videos.Videos[0].BV)
 	if err != nil {
 		t.Fatal(err)
@@ -197,5 +205,58 @@ func TestSearchPaginationUsesUpstreamCount(t *testing.T) {
 	p, err := s.Search(context.Background(), "Title", "video", 1)
 	if err != nil || !p.HasMore || len(p.Videos) != 1 || p.Videos[0].Title != "Title" {
 		t.Fatal("filtered short page incorrectly exhausted", err, p)
+	}
+}
+
+func TestRestoreTrackOrderAndMissingParent(t *testing.T) {
+	s := NewService()
+	if err := Init(s, filepath.Join(t.TempDir(), "library.sqlite")); err != nil {
+		t.Fatal(err)
+	}
+	defer Close(s)
+	ctx := context.Background()
+	tracks := []Track{
+		{BV: "BV1xx411c7mD", CID: "1", Title: "First"},
+		{BV: "BV1xx411c7mD", CID: "2", Title: "Middle"},
+		{BV: "BV1xx411c7mD", CID: "3", Title: "Last"},
+	}
+	if _, err := s.AddTracks(ctx, "1", tracks); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := s.RemoveTrack(ctx, "1", tracks[1].BV, "2"); err != nil {
+		t.Fatal(err)
+	}
+	lists, err := s.RestoreTrack(ctx, "1", tracks[1].BV, "2", 1)
+	if err != nil || len(lists[0].Tracks) != 3 || lists[0].Tracks[1].CID != "2" {
+		t.Fatal(lists, err)
+	}
+	lists, err = s.RestoreTrack(ctx, "1", tracks[1].BV, "2", 1)
+	if err != nil || len(lists[0].Tracks) != 3 {
+		t.Fatal("duplicate restore", lists, err)
+	}
+	if _, err = s.RestoreTrack(ctx, "999", tracks[1].BV, "2", 1); err == nil {
+		t.Fatal("missing parent accepted")
+	}
+	if _, err = s.RestoreTrack(ctx, "1", tracks[1].BV, "999", 1); err == nil {
+		t.Fatal("missing track accepted")
+	}
+	lists, err = s.Library(ctx)
+	if err != nil || len(lists[0].Tracks) != 3 || lists[0].Tracks[1].CID != "2" {
+		t.Fatal("failed restore changed order", lists, err)
+	}
+}
+
+func TestCollectionMetadata(t *testing.T) {
+	s := NewService()
+	s.client.Transport = transportFunc(func(r *http.Request) (*http.Response, error) {
+		body := `{"code":0,"data":{"items_lists":{"page":{"total":2},"seasons_list":[{"meta":{"season_id":10,"name":"孤独摇滚","cover":"//example.com/cover.jpg","total":19}}],"series_list":[{"meta":{"series_id":20,"name":"系列"}}]}}}`
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: make(http.Header)}, nil
+	})
+	page, err := s.Collections(context.Background(), "123", 1)
+	if err != nil || len(page.Items) != 2 {
+		t.Fatal(page, err)
+	}
+	if page.Items[0].Count == nil || *page.Items[0].Count != 19 || page.Items[0].Cover != "https://example.com/cover.jpg" || page.Items[1].Count != nil {
+		t.Fatal("collection metadata lost", page)
 	}
 }

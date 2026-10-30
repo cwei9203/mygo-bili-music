@@ -5,6 +5,8 @@ import { call } from "mygo-runtime";
 // ---- Types ----
 
 export interface Collection {
+  cover: string;
+  count: number | null;
   id: string;
   mid: string;
   title: string;
@@ -19,6 +21,15 @@ export interface CollectionPage {
 export interface Detail {
   tracks: Track[];
   collection: Collection | null;
+}
+
+/**
+ * Info is what 关于 shows: where this Mac or PC keeps the library, written the
+ * way that platform writes paths.
+ */
+export interface Info {
+  library: string;
+  os: string;
 }
 
 export interface Playback {
@@ -57,6 +68,7 @@ export interface Uploader {
 }
 
 export interface Video {
+  views: number | null;
   bv: string;
   title: string;
   uploader: string;
@@ -79,8 +91,24 @@ export const Service = {
   detail(bv: string): Promise<Detail> {
     return call("Service.Detail", bv);
   },
+  /**
+   * Discover returns the next draw of the day's music ranking. The first call of
+   * each window fetches and shuffles the ranking once; later calls pop from that
+   * deck, so 换一批 keeps producing unheard rows without touching B站 again.
+   * A new window, or an exhausted deck, fetches a fresh ranking.
+   */
+  discover(): Promise<Video[]> {
+    return call("Service.Discover");
+  },
   editList(id: string, name: string, action: string): Promise<Playlist[]> {
     return call("Service.EditList", id, name, action);
+  },
+  /**
+   * Info reports the library path, shortened to the platform's own placeholder
+   * for the folder that holds it.
+   */
+  info(): Promise<Info> {
+    return call("Service.Info");
   },
   library(): Promise<Playlist[]> {
     return call("Service.Library");
@@ -99,6 +127,10 @@ export const Service = {
   },
   resolve(bv: string, cid: string): Promise<Playback> {
     return call("Service.Resolve", bv, cid);
+  },
+  /** RestoreTrack restores membership and ordering without replacing the rest of the playlist. */
+  restoreTrack(id: string, bv: string, cid: string, index: number): Promise<Playlist[]> {
+    return call("Service.RestoreTrack", id, bv, cid, index);
   },
   search(keyword: string, kind: string, page: number): Promise<SearchPage> {
     return call("Service.Search", keyword, kind, page);

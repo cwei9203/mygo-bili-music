@@ -1,5 +1,6 @@
 {
   "passed": true,
+  "backgroundAndMode": true,
   "result": {
     "ui": true,
     "ipc": true,

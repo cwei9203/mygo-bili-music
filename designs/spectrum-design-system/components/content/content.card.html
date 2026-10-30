@@ -1,0 +1,58 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Content" subtitle="Avatar 尺寸与 S2 图标集" -->
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--s2-background-base); }
+  .label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--s2-text-subdued); margin: 0 0 8px; }
+  .row { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .icons { display: grid; grid-template-columns: repeat(11, 1fr); gap: 10px; }
+  .icon { display: grid; place-items: center; height: 34px; border-radius: var(--s2-radius-sm); background: var(--s2-background-layer-1); color: var(--s2-text-neutral); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Avatar, Icon } = window.SpectrumDesignSystem_a44d86;
+
+const iconNames = [
+  'check', 'checkCircle', 'chevronDown', 'chevronUp', 'chevronLeft', 'chevronRight',
+  'search', 'close', 'play', 'pause', 'add', 'more', 'list', 'shuffle',
+  'refresh', 'volume', 'star', 'starFilled', 'music', 'settings', 'edit', 'alert', 'info',
+];
+
+function ContentCard() {
+  return (
+    <div>
+      <div className="label">Avatar</div>
+      <div className="row">
+        <Avatar name="迟到的电台" size={20} />
+        <Avatar name="木箱子" size={24} />
+        <Avatar name="慢岛" size={32} />
+        <Avatar name="南窗" size={40} />
+        <Avatar name="Chen Wei" size={48} />
+        <Avatar name="拾音" size={64} />
+      </div>
+
+      <div className="label">Icons · S2 workflow icons</div>
+      <div className="icons">
+        {iconNames.map((iconName) => (
+          <span className="icon" key={iconName} title={iconName}>
+            <Icon name={iconName} size={20} />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<ContentCard />);
+</script>
+</body>
+</html>

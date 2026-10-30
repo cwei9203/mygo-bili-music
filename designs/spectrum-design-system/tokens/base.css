@@ -1,0 +1,58 @@
+/* Base element styles. Spectrum 2 resets + type defaults. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--s2-background-base);
+  color: var(--s2-text-body);
+  font-family: var(--s2-font-sans);
+  font-size: var(--s2-font-size-100);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+:lang(ja, ko, zh, zh-Hant, zh-Hans) {
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--s2-text-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+code,
+kbd {
+  font-family: var(--s2-font-code);
+  font-size: 0.9em;
+}
+
+::selection {
+  background: var(--s2-accent-bg);
+  color: #fff;
+}

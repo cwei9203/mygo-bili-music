@@ -8,5 +8,11 @@
   "buildCommand": "npm run build:web",
   "frontendDist": "dist",
   "bindings": "src/mygo.ts",
-  "out": "build"
+  "icon": "assets/icon.png",
+  "out": "build",
+  "macos": {
+    "infoPlist": {
+      "CFBundleIconFile": "Shiyin.icns"
+    }
+  }
 }

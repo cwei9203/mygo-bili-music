@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Queue } from "./queue.ts";
+import { Queue, modes } from "./queue.ts";
 test("shuffle visits every item once and starts another full round", () => {
   const q = new Queue();
   q.start(["a", "b", "c"], "a");
@@ -26,4 +26,18 @@ test("sequential ends; single loop only repeats on natural end", () => {
   q.setMode("单曲循环");
   assert.equal(q.next(true), "b");
   assert.equal(q.next(false), "a");
+});
+
+test("restored mode controls playback; unknown preferences use sequential", () => {
+  for (const mode of modes) {
+    const q = new Queue(mode);
+    assert.equal(q.mode, mode);
+    q.start(["a", "b"], "b");
+    const next = q.next(true);
+    if (mode === "顺序播放") assert.equal(next, null);
+    else if (mode === "单曲循环") assert.equal(next, "b");
+    else assert.equal(next, "a");
+  }
+  assert.equal(new Queue(null).mode, "顺序播放");
+  assert.equal(new Queue("invalid").mode, "顺序播放");
 });

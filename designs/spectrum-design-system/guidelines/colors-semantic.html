@@ -1,0 +1,47 @@
+<!-- @dsCard group="Colors" viewport="700x300" name="Semantic colors" subtitle="浅色与深色两套语义色" -->
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; padding:20px; background:var(--s2-background-base); font-family:var(--s2-font-sans); }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .panel { padding:14px; border-radius:10px; border:1px solid var(--s2-gray-200); background:var(--s2-background-base); color:var(--s2-text-body); }
+  .panel[data-theme="dark"] { border-color:var(--s2-gray-300); }
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
+  .sw { display:flex; flex-direction:column; gap:4px; }
+  .chip { height:34px; border-radius:6px; border:1px solid rgba(0,0,0,.08); }
+  .nm { font-size:10px; color:var(--s2-text-subdued); font-family:var(--s2-font-code); }
+  .cap { font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--s2-text-subdued); margin-bottom:10px; }
+</style></head>
+<body>
+<div class="pair">
+  <div class="panel" data-theme="light">
+    <div class="cap">Light</div>
+    <div class="grid">
+      <div class="sw"><div class="chip" style="background:var(--s2-accent-bg)"></div><span class="nm">accent</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-positive-bg)"></div><span class="nm">positive</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-notice-bg)"></div><span class="nm">notice</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-negative-bg)"></div><span class="nm">negative</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-neutral-bg)"></div><span class="nm">neutral</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-accent-bg-subtle)"></div><span class="nm">accent subtle</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-layer-1)"></div><span class="nm">layer 1</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-layer-2)"></div><span class="nm">layer 2</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-pasteboard)"></div><span class="nm">pasteboard</span></div>
+    </div>
+  </div>
+  <div class="panel" data-theme="dark">
+    <div class="cap">Dark</div>
+    <div class="grid">
+      <div class="sw"><div class="chip" style="background:var(--s2-accent-bg)"></div><span class="nm">accent</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-positive-bg)"></div><span class="nm">positive</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-notice-bg)"></div><span class="nm">notice</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-negative-bg)"></div><span class="nm">negative</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-neutral-bg)"></div><span class="nm">neutral</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-accent-bg-subtle)"></div><span class="nm">accent subtle</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-layer-1)"></div><span class="nm">layer 1</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-layer-2)"></div><span class="nm">layer 2</span></div>
+      <div class="sw"><div class="chip" style="background:var(--s2-background-pasteboard)"></div><span class="nm">pasteboard</span></div>
+    </div>
+  </div>
+</div>
+</body></html>

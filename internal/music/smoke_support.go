@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -48,7 +50,7 @@ func ConfigureSmoke(s *Service) {
 		}
 		return &http.Response{StatusCode: 200, Header: http.Header{"Content-Type": {"application/json"}}, Body: io.NopCloser(strings.NewReader(body))}, nil
 	})
-	files := http.FileServer(http.Dir("/tmp/shiyin-media-fixtures"))
+	files := http.FileServer(http.Dir(filepath.Join(os.TempDir(), "shiyin-media-fixtures")))
 	s.media.Transport = smokeTransport(func(r *http.Request) (*http.Response, error) {
 		copy := r.Clone(r.Context())
 		copy.URL = &url.URL{Path: r.URL.Path}

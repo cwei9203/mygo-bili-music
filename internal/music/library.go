@@ -248,3 +248,53 @@ func (s *Service) MoveTrack(ctx context.Context, id, bv, cid string, offset int)
 	}
 	return s.library(ctx)
 }
+
+// RestoreTrack restores membership and ordering without replacing the rest of the playlist.
+func (s *Service) RestoreTrack(ctx context.Context, id, bv, cid string, index int) ([]Playlist, error) {
+	s.libraryMu.Lock()
+	defer s.libraryMu.Unlock()
+	if !idPattern.MatchString(id) || !bvPattern.MatchString(bv) || !idPattern.MatchString(cid) || index < 0 {
+		return nil, errors.New("恢复歌曲参数无效")
+	}
+	lists, err := s.library(ctx)
+	if err != nil {
+		return nil, err
+	}
+	var items []Track
+	found := false
+	for _, p := range lists {
+		if p.ID == id {
+			items, found = p.Tracks, true
+		}
+	}
+	if !found {
+		return nil, errors.New("原歌单已删除，无法撤销")
+	}
+	for _, t := range items {
+		if t.BV == bv && t.CID == cid {
+			return lists, nil
+		}
+	}
+	index = min(index, len(items))
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback()
+	if _, err = tx.ExecContext(ctx, "INSERT INTO entries VALUES(?,?,?,?)", id, bv, cid, index); err != nil {
+		return nil, err
+	}
+	for i, t := range items {
+		position := i
+		if i >= index {
+			position++
+		}
+		if _, err = tx.ExecContext(ctx, "UPDATE entries SET position=? WHERE list_id=? AND bv=? AND cid=?", position, id, t.BV, t.CID); err != nil {
+			return nil, err
+		}
+	}
+	if err = tx.Commit(); err != nil {
+		return nil, err
+	}
+	return s.library(ctx)
+}
